@@ -1,14 +1,18 @@
 
 package objetos.web.entity;
 
+import java.util.Date;
+import java.util.Objects;
+
 public class Carro {
     
+    private Integer id;
     private String modelo;
     private String fabricante;
     private String cor;
-    private Integer ano;
+    private Date ano;
 
-    public Carro(String modelo, String fabricante, String cor, Integer ano) {
+    public Carro(String modelo, String fabricante, String cor, Date ano) {
          this.modelo=modelo;
          this.fabricante=fabricante;
          this.cor=cor;
@@ -16,6 +20,10 @@ public class Carro {
     }
 
     public Carro() {
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getModelo() {
@@ -30,8 +38,12 @@ public class Carro {
         return cor;
     }
 
-    public Integer getAno() {
+    public Date getAno() {
         return ano;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setModelo(String modelo) {
@@ -46,10 +58,43 @@ public class Carro {
         this.cor = cor;
     }
 
-    public void setAno(Integer ano) {
+    public void setAno(Date ano) {
         this.ano = ano;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Carro other = (Carro) obj;
+        if (!Objects.equals(this.modelo, other.modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.fabricante, other.fabricante)) {
+            return false;
+        }
+        if (!Objects.equals(this.cor, other.cor)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return Objects.equals(this.ano, other.ano);
+    }
+
     
-   
     
 }

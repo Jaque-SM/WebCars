@@ -1,17 +1,28 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      template="template.xhtml">
-  
-        <h:form id="forme">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro Carros</title>
+    </h:head>
+    <h:body>
+        <h2>Cadastro de carros</h2>
+          <h:form id="forme">
             <p:toolbar>
                 <p:toolbarGroup>
                 <p:commandButton value="Adicionar" action="#{carroBean.AddCars()}" update=":forme"></p:commandButton>
+                
+                <p:commandButton value="Listar" action="#{carroBean.ListarCars()}" update=":forme"></p:commandButton>
+                
                 </p:toolbarGroup>
+                                    
             </p:toolbar>
+              
+              <p:messages autoUpdate="true" showDetail="true">
+                  
+              </p:messages>
         <p:fieldset legend="Objeto Carro">
             <p:panelGrid columns="2"> 
                 
@@ -25,11 +36,21 @@
                <h:inputText value="#{carroBean.carro.cor}"></h:inputText>
 
                <h:outputLabel value="Ano:"></h:outputLabel>
-               <p:inputMask mask="9999" value="#{carroBean.carro.ano}"></p:inputMask>
-               
+             <p:calendar value="#{carroBean.carro.ano}" pattern="yyyy-MMM-dd"/>
+
+             
             </p:panelGrid>
+            
+            
             <p:dataTable var="carro" value="#{carroBean.carros}" paginator="true" >
-                    
+                <p:column>
+                    <p:commandButton value="Editar" action="#{carroBean.Editar(carro)}" update=":forme"></p:commandButton>
+                </p:column>
+               
+                <p:column>
+                    <p:commandButton value="Remover" action="#{carroBean.deletar(carro)}" update=":forme"></p:commandButton>
+                </p:column>
+                
                     <p:column headerText="Modelo">
                         <h:outputText value="#{carro.modelo}"></h:outputText>
                     </p:column>
@@ -51,5 +72,8 @@
         </p:fieldset>
       
         </h:form>
-  </ui:decorate>
+        
+        
+    </h:body>
+</html>
 
