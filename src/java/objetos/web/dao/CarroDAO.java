@@ -7,13 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objetos.web.entity.Carro;
 import objetos.web.util.FabricaConexao;
 import objetos.web.util.exception.ErroSistema;
 
 
-public class CarroDAO {
+public class CarroDAO implements CrudDAO<Carro>{
     
+    @Override
     public void salvar (Carro carro) throws ErroSistema{
           
         try {
@@ -41,13 +44,14 @@ public class CarroDAO {
             }
   
     }
-    public void deletar(Integer idCarro) throws ErroSistema{
+       @Override
+    public void deletar(Carro idCarro) throws ErroSistema{
         try {
             Connection conexao=FabricaConexao.getConexao();
             
             PreparedStatement  ps=conexao.prepareCall("delete from carro where id=?");
             
-            ps.setInt(1, idCarro);
+            ps.setInt(1, idCarro.getId());
             ps.execute();
             
         } catch (SQLException ex) {
@@ -56,15 +60,16 @@ public class CarroDAO {
         }
         
         
-        
-        
     }
-    public List buscarCarro() throws ErroSistema{
-         Connection conexao=FabricaConexao.getConexao();
+    @Override
+    public List<Carro> buscar(){
+        
+           try {
+               
+            Connection conexao=FabricaConexao.getConexao();
 
           PreparedStatement  ps;
           
-           try {
             ps = conexao.prepareCall("select * from carro");
        
             ResultSet resultlist=ps.executeQuery();
@@ -85,9 +90,25 @@ public class CarroDAO {
                 
             return carros;
         
+      
+        } catch (ErroSistema ex) {
+            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            throw new ErroSistema("Erro ao tentar buscar o carro!", ex);
+            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
 
     }
+
+   
+
+ 
+
+  
+ 
+
+
+ 
+
+
 }
