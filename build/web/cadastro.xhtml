@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:sc="http://xmlns.jcp.org/jsf/composite/component">
     <h:head>
         <title>Cadastro Carros</title>
     </h:head>
@@ -13,18 +14,10 @@
          <p:messages autoUpdate="true" showDetail="true"> </p:messages>
          <p:fieldset legend="Objeto Carro">
              
-                 <p:toolbar>
-                <p:toolbarGroup>
-                    
-                    <p:commandButton value="Novo" action="#{carroBean.novo()}" update=":forme"></p:commandButton>
+             <sc:toolbarCrud crudBean="#{carroBean}"/>
 
-                    <p:commandButton value="Salvar" action="#{carroBean.salvar()}" update=":forme" disabled="#{carroBean.isbuscar()==true}"></p:commandButton>
-                
-                    <p:commandButton value="Buscar" action="#{carroBean.buscar()}" update=":forme"></p:commandButton>
-                
-                </p:toolbarGroup>
-                                    
-            </p:toolbar>
+
+           
              <p:panelGrid columns="2" rendered="#{carroBean.isbuscar()==false}"> 
                 
                 <h:outputLabel value="Modelo:"></h:outputLabel>
