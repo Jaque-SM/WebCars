@@ -6,11 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import objetos.web.DaoJPA.CrudJPA;
 import objetos.web.dao.CrudDAO;
 import objetos.web.util.exception.ErroSistema;
 
 
-public abstract class CrudBean <E, D extends CrudDAO> {
+public abstract class CrudBean <E, D extends CrudJPA> {
 
 
     private String estadoTela= "buscar"; //inserir, editar, buscar
@@ -61,11 +62,11 @@ public abstract class CrudBean <E, D extends CrudDAO> {
     
     public void salvar(){
         try {
-            get().salvar(entidade);
+            get().SalvarJPA(entidade);
             entidade=criarNovaEntidade();
             adicionarMensagem("Salvo com sucesso", FacesMessage.SEVERITY_INFO);
             
-        } catch (Exception e) {
+        } catch (ErroSistema e) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, e);
             adicionarMensagem(e.getMessage(), FacesMessage.SEVERITY_ERROR);
         
@@ -77,10 +78,9 @@ public abstract class CrudBean <E, D extends CrudDAO> {
         mudarParaEditar();
         
     }
-    
     public void deletar(E entidade){
         try {
-            get().deletar(entidade);
+            get().DeletarJPA(entidade);
             entidades.remove(entidade);
            adicionarMensagem("Deletado com sucesso!", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
@@ -94,13 +94,11 @@ public abstract class CrudBean <E, D extends CrudDAO> {
         if (isbuscar()==false) {
             mudarParaBuscar();
             return;
-        
         } 
         try {
-            entidades=get().buscar();
-            if (entidades==null||entidades.size()<1){
+            entidades=get().buscarJPA();
+            if (entidades==null||entidades.size()<=1){
                  adicionarMensagem("Não temos nada cadastrado", FacesMessage.SEVERITY_WARN);
-                
             }
         }  
          catch (Exception e) {
@@ -113,11 +111,9 @@ public abstract class CrudBean <E, D extends CrudDAO> {
     
     public abstract E criarNovaEntidade();
     
-    
     public boolean isInserir(){
         
         return "inserir".equals(estadoTela);
-        
     }
     
     public boolean iseditar(){

@@ -3,17 +3,26 @@ package objetos.web.entity;
 
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+
+@Entity
 public class Carro {
-    
+  
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String modelo;
     private String fabricante;
     private String cor;
     private Date ano;
 
-    public Carro(String modelo, String fabricante, String cor, Date ano) {
-         this.modelo=modelo;
+    public Carro(Integer id,String modelo, String fabricante, String cor, Date ano) {
+         this.id=id;
+          this.modelo=modelo;
          this.fabricante=fabricante;
          this.cor=cor;
          this.ano=ano;
