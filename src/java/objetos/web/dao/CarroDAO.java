@@ -91,9 +91,7 @@ public class CarroDAO implements CrudDAO<Carro>{
             return carros;
         
       
-        } catch (ErroSistema ex) {
-            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ErroSistema | SQLException ex) {
             Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

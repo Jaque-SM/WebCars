@@ -1,0 +1,23 @@
+create database veiculos;
+
+use veiculos;
+
+CREATE TABLE `carro` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `modelo` varchar(45) NOT NULL,
+  `fabricante` varchar(45) NOT NULL,
+  `cor` varchar(45) NOT NULL,
+  `ano` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=259 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+**************************************************
+
+CREATE TABLE `usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) NOT NULL,
+  `senha` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+

@@ -5,6 +5,7 @@ package objetos.web.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import objetos.web.CrudJPA.CarroCrud;
 import objetos.web.dao.CarroDAO;
 import objetos.web.dao.CrudDAO;
 import objetos.web.entity.Carro;
@@ -12,24 +13,23 @@ import objetos.web.util.exception.ErroSistema;
 
 @SessionScoped
 @ManagedBean
-public class CarroBean extends CrudBean<Carro, CarroDAO>{
-
+public class CarroBean extends CrudBean<Carro, CarroCrud>{
     
-    private CarroDAO carroDAO;       
-            
+    private CarroCrud carro;       
+
     @Override
-    public CarroDAO get() {
-            if (carroDAO==null){     
-                carroDAO=new CarroDAO();
+    public CarroCrud get() {
+           if (carro==null){     
+                carro=new CarroCrud();
             }
-            return carroDAO;
+            return carro;
     }
 
     @Override
     public Carro criarNovaEntidade() {
-
-            return new Carro();
-
+        
+        return new Carro();
+        
     }
 
    
