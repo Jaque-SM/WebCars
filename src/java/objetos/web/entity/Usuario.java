@@ -2,25 +2,33 @@
 package objetos.web.entity;
 
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-
+@Entity
 public class Usuario {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String usuario;
     private String senha;
 
-    public Usuario(Integer id, String usuario, String senha) {
-        this.id = id;
-        this.usuario = usuario;
-        this.senha = senha;
-    }
-
     public Usuario() {
     }
-    
-    
 
+    public Usuario(int i, String string, String moreno100) {
+        this.id=i;
+        this.usuario = string;
+        this.senha = moreno100;
+    }
+
+    public Usuario(String string, String moreno100) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
     public Integer getId() {
         return id;
     }

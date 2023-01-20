@@ -97,7 +97,7 @@ public abstract class CrudBean <E, D extends CrudJPA> {
         } 
         try {
             entidades=get().buscarJPA();
-            if (entidades==null||entidades.size()<=1){
+            if (entidades==null||entidades.size()<1){
                  adicionarMensagem("Não temos nada cadastrado", FacesMessage.SEVERITY_WARN);
             }
         }  
