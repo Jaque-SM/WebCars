@@ -36,12 +36,12 @@ public class CarroCrud implements CrudJPA<Carro> {
          
         if (entidade.getId()==null){
          Query q=entityManager.createNativeQuery("INSERT INTO Carro (modelo, fabricante, cor, ano) VALUES(?,?,?,?);", Carro.class)
-            .setParameter(1, entidade.getModelo())
+             .setParameter(1, entidade.getModelo())
              .setParameter(2, entidade.getFabricante())
              .setParameter(3, entidade.getCor())
              .setParameter(4, entidade.getAno());
             
-        System.out.println("salvou os dados");
+        System.out.println("Salvou os dados");
         entityManager.persist(entidade);
         entityManager.getTransaction().commit();
         }

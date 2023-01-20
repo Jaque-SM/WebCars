@@ -16,6 +16,10 @@ import objetos.web.util.exception.ErroSistema;
 
 public class UsuarioDAO implements CrudDAO<Usuario> {
 
+    public UsuarioDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     @Override
     public void salvar(Usuario entidade) throws ErroSistema {
           try {
