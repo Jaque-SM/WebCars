@@ -7,20 +7,19 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import objetos.web.DaoJPA.CrudJPA;
-import objetos.web.dao.CrudDAO;
 import objetos.web.util.exception.ErroSistema;
 
 
-public abstract class CrudBean <E, D extends CrudJPA> {
+public abstract class CrudBean <A, D extends CrudJPA> {
 
 
     private String estadoTela= "buscar"; //inserir, editar, buscar
     
     
-    private E entidade;
+    private A entidade;
     
     
-    private List<E> entidades;
+    private List<A> entidades;
     
 
     public String getEstadoTela() {
@@ -32,20 +31,20 @@ public abstract class CrudBean <E, D extends CrudJPA> {
     }
 
 
-    public E getEntidade() {
+    public A getEntidade() {
         return entidade;
     }
 
-    public List<E> getEntidades() {
+    public List<A> getEntidades() {
         return entidades;
     }
 
   
-    public void setEntidade(E entidade) {
+    public void setEntidade(A entidade) {
         this.entidade = entidade;
     }
 
-    public void setEntidades(List<E> entidades) {
+    public void setEntidades(List<A> entidades) {
         this.entidades = entidades;
     }
     
@@ -73,12 +72,12 @@ public abstract class CrudBean <E, D extends CrudJPA> {
         }
         
     }
-    public void editar(E entidade){
+    public void editar(A entidade){
         this.entidade=entidade;
         mudarParaEditar();
         
     }
-    public void deletar(E entidade){
+    public void deletar(A entidade){
         try {
             get().DeletarJPA(entidade);
             entidades.remove(entidade);
@@ -109,7 +108,7 @@ public abstract class CrudBean <E, D extends CrudJPA> {
     
     public abstract D get();
     
-    public abstract E criarNovaEntidade();
+    public abstract A criarNovaEntidade();
     
     public boolean isInserir(){
         
