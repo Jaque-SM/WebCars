@@ -44,6 +44,7 @@ public class CarroCrud implements CrudJPA<Carro> {
         System.out.println("Salvou os dados");
         entityManager.persist(entidade);
         entityManager.getTransaction().commit();
+
         }
         else {
            entityManager.createQuery("update Carro c set c.modelo=:modelo, c.fabricante=:fabricante, c.cor=:cor, c.ano=:ano where c.id = "+entidade.getId()+"")
@@ -57,19 +58,19 @@ public class CarroCrud implements CrudJPA<Carro> {
               System.out.println("Atualizado com sucesso!");
             
         }
-        entityManager.close();
-	entityManagerFactory.close();
-     }
+    }
     
      @Override
      public void DeletarJPA(Carro entidade) throws ErroSistema {
         entityManager.getTransaction().begin();
-         entityManager.createQuery("delete from Carro c where c.id="+entidade.getId()+"")
+        
+         if (entidade.getId()!=null){
+        entityManager.createQuery("delete from Carro c where c.id="+entidade.getId()+"")
             .executeUpdate();         
          entityManager.getTransaction().commit();
-         entityManager.close();
          
        System.out.print("Deletado com sucesso!");
+         }
          
      }
 

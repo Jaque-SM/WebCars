@@ -6,8 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import objetos.web.CrudJPA.CarroCrud;
-import objetos.web.dao.CarroDAO;
-import objetos.web.dao.CrudDAO;
+
 import objetos.web.entity.Carro;
 import objetos.web.util.exception.ErroSistema;
 

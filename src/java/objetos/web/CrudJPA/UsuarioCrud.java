@@ -17,8 +17,8 @@ import objetos.web.util.exception.ErroSistema;
 
 public class UsuarioCrud implements CrudJPA<Usuario>{
 
-    private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ObjetosPU");
-    private static final EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static  EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ObjetosPU");
+    private static  EntityManager entityManager=entityManagerFactory.createEntityManager();;
     
 
     @Override
@@ -33,6 +33,8 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
              entityManager.persist(entidade); 
             entityManager.getTransaction().commit();
             System.out.println("Usuario salvo com sucesso!");
+            entityManager.close();
+
          }
          else {
              entityManager.createQuery("update Usuario u set u.usuario=:usuario, u.senha=:senha where u.id="+entidade.getId()+"")
@@ -42,9 +44,9 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
              
               entityManager.getTransaction().commit();
               System.out.println("Usuario atualizado com sucesso!");
+
          }
-        entityManager.close();
-	entityManagerFactory.close();
+	
     }
 
     @Override
@@ -55,12 +57,9 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
                  entityManager.createQuery("delete from Usuario u where u.id="+entidade.getId()+"")
                         .executeUpdate();
                   entityManager.getTransaction().commit();
-                  entityManager.close();
-         
                  System.out.print("Usuario deletado com sucesso!");  
                  
              }
-
     }
 
     @Override
@@ -89,6 +88,7 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
          return lista;
 
     }
+ 
 
    
 
