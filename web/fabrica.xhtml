@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sc="http://xmlns.jcp.org/jsf/composite/component"
+      template="index.xhtml">
+   
+    <ui:define name="fabrica">
+        
+       <h:form id="forme">
+                 
+         <p:fieldset>
+                  <p:messages autoUpdate="true"/>
+
+             <sc:toolbarCrud crudBean="#{fabricanteBean}"/>
+
+             <p:panelGrid columns="2" rendered="#{fabricanteBean.isbuscar()==false}">
+                 
+                  <h:outputLabel value="Nome:"></h:outputLabel>
+                  <h:inputText value="#{fabricanteBean.entidade.nome}"></h:inputText>
+                 
+                 <h:outputLabel value="CNPJ:"></h:outputLabel>
+                 <h:inputText value="#{fabricanteBean.entidade.cnpj}"></h:inputText>
+
+                 <h:outputLabel value="Telefone:"></h:outputLabel>
+                 <h:inputText value="#{fabricanteBean.entidade.telefone}"></h:inputText>
+                 
+             </p:panelGrid>
+                 
+             <p:dataTable var="fabrica" value="#{fabricanteBean.entidades}"  rendered="#{fabricanteBean.isbuscar()==true}" paginator="true" >
+                <p:column>
+                    <p:commandButton value="Editar" action="#{fabricanteBean.editar(fabrica)}" update=":forme"></p:commandButton>
+                </p:column>
+                     
+                 <p:column>
+                     <p:commandButton value="Remover" action="#{fabricanteBean.deletar(fabrica)}" update=":forme"></p:commandButton>
+                </p:column>
+                     
+                 
+                 <p:column headerText="Nome">
+                        <h:outputText value="#{fabrica.nome}"></h:outputText>
+                  </p:column>
+                 
+                    <p:column headerText="CNPJ">
+                        <h:outputText value="#{fabrica.cnpj}"></h:outputText>
+                  </p:column>
+                 
+                    <p:column headerText="Telefone">
+                        <h:outputText value="#{fabrica.telefone}"></h:outputText>
+                  </p:column>
+                 
+                 
+                 
+                 
+                 
+             </p:dataTable>
+             
+             
+             
+             
+             
+             
+             
+             
+         </p:fieldset>
+         
+         
+         
+        
+       
+       
+       
+       </h:form>
+        
+        
+        
+        
+        
+        
+        
+    </ui:define>
+    
+    
+    
+        
+</ui:composition>
+

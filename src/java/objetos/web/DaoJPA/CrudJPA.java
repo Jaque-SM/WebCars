@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package objetos.web.DaoJPA;
 
 import java.util.List;
@@ -15,4 +12,6 @@ public interface CrudJPA<A> {
     public void DeletarJPA (A entidade) throws ErroSistema;     
         
     public  List<A> buscarJPA();
+    
+    
 }

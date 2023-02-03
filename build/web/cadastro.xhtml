@@ -6,7 +6,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:sc="http://xmlns.jcp.org/jsf/composite/component"
-      template="index.xhtml">
+      template="index.xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
  
     <ui:define name="carro">
           <h:form id="forme">
@@ -14,7 +15,6 @@
          <p:fieldset legend="Cadastro Carro">
              
              <sc:toolbarCrud crudBean="#{carroBean}"/>
-
 
              <p:panelGrid columns="2" rendered="#{carroBean.isbuscar()==false}"> 
                 
@@ -28,11 +28,29 @@
                <h:inputText value="#{carroBean.entidade.cor}"></h:inputText>
  
                <h:outputLabel value="Ano:"></h:outputLabel>
-             <p:calendar value="#{carroBean.entidade.ano}" pattern="yyyy-MMM-dd"/> 
-            </p:panelGrid>
+               <p:calendar value="#{carroBean.entidade.ano}" pattern="yyyy-MM-dd"/> 
+                                
+              <p:outputLabel  value="Selecione  Fábrica: "></p:outputLabel>
+                 <p:selectOneMenu  id="forme" value="#{carroBean.entidade.fab.nome}">
+                     
+                     <f:selectItem itemLabel="fábrica"/>
+                    
+                     <f:selectItems value="#{fabricanteBean.valor}" var="f"  itemValue="#{f.nome}" itemLabel="#{f.nome}"/>
+                     
+                     <p:ajax process="@this" update="forme" listener="#{fabricanteBean.listaPorFabrica(event)}" />
+                     
+                 </p:selectOneMenu>
+              
+                
+
+                     
+             </p:panelGrid>
+             
             
-            
-            <p:dataTable var="carro" value="#{carroBean.entidades}" rendered="#{carroBean.isbuscar()==true}" paginator="true" >
+              
+             
+           
+             <p:dataTable var="carro" value="#{carroBean.entidades}"  rendered="#{carroBean.isbuscar()==true}" paginator="true" >
                 <p:column>
                     <p:commandButton value="Editar" action="#{carroBean.editar(carro)}" update=":forme"></p:commandButton>
                 </p:column>
@@ -55,9 +73,10 @@
                    
                     <p:column headerText="Ano">
                        <h:outputText value="#{carro.ano}"></h:outputText>
-                    </p:column>                
-                
-            </p:dataTable>
+                    </p:column> 
+                          
+             </p:dataTable>      
+           
             
         </p:fieldset>
       

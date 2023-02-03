@@ -1,11 +1,15 @@
 
 package objetos.web.entity;
 
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -15,7 +19,20 @@ public class Usuario {
     private Integer id;
     private String usuario;
     private String senha;
+    
+    @OneToMany(cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    @JoinColumn(name = "usuario_id")
+    private List<Carro> cars;
 
+    public List<Carro> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Carro> cars) {
+        this.cars = cars;
+    }
+    
     public Usuario() {
     }
 

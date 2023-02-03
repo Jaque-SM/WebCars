@@ -7,17 +7,26 @@ CREATE TABLE `carro` (
   `modelo` varchar(45) NOT NULL,
   `fabricante` varchar(45) NOT NULL,
   `cor` varchar(45) NOT NULL,
-  `ano` date DEFAULT NULL,
+  `ano` date NOT NULL,
+  `fab_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=259 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
+); 
 **************************************************
+CREATE TABLE `fabricante` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) DEFAULT NULL,
+  `cnpj` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
 
+************************************************************
 CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+); 
+
 
 
