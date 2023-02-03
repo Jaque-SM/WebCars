@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import objetos.web.DaoJPA.CrudJPA;
 import objetos.web.entity.Carro;
+import objetos.web.entity.Fabricante;
 import objetos.web.entity.Usuario;
 import objetos.web.util.exception.ErroSistema;
 
@@ -26,16 +27,18 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
            entityManager.getTransaction().begin();
          
          if (entidade.getId()==null){
-            entityManager.createNativeQuery("insert into Usuario(usuario, senha) values(usuario, senha);", Usuario.class)
+            entityManager.createNativeQuery("insert into Usuario(usuario, senha, cars) values(usuario, senha, cars);", Usuario.class)
                     .setParameter(1, entidade.getUsuario())
-                    .setParameter(2, entidade.getSenha());
+                    .setParameter(2, entidade.getSenha())
+                    .setParameter(3, entidade.getCars());
                       
-             entityManager.persist(entidade); 
+            entityManager.persist(entidade); 
             entityManager.getTransaction().commit();
-            System.out.println("Usuario salvo com sucesso!");
+            System.out.println("Usuário salvo com sucesso!");
             entityManager.close();
 
          }
+         
          else {
              entityManager.createQuery("update Usuario u set u.usuario=:usuario, u.senha=:senha where u.id="+entidade.getId()+"")
                      .setParameter("usuario", entidade.getUsuario())
@@ -61,6 +64,9 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
                  
              }
     }
+    
+    
+
 
     @Override
     public List<Usuario> buscarJPA() {
@@ -88,6 +94,10 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
          return lista;
 
     }
+
+    
+
+
  
 
    

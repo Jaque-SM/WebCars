@@ -6,7 +6,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:sc="http://xmlns.jcp.org/jsf/composite/component"
-      template="index.xhtml">
+      template="index.xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
      
     <ui:define name="usuario">
        <p:messages autoUpdate="true" />
@@ -21,6 +22,19 @@
                 <h:inputText value="#{usuarioBean.entidade.usuario}"></h:inputText>
                 <h:outputLabel value="Informe a senha:"></h:outputLabel>
                 <h:inputText value="#{usuarioBean.entidade.senha}"></h:inputText>
+                
+                 <p:outputLabel  value="Selecione o carro "></p:outputLabel>
+                 <p:selectOneMenu  id="forme" value="#{usuarioBean.entidade.cars}">
+                     
+                     <f:selectItem itemLabel="Carro"/>
+                    
+                     <f:selectItems value="#{carroBean.carros}" var="carro"  itemValue="#{carro.modelo}" itemLabel="#{carro.modelo}"/>
+                     
+                     <p:ajax process="@this" update="forme" listener="#{carroBean.listarCars(event)}" />
+                     
+                 </p:selectOneMenu>
+                        
+                
                 
             </p:panelGrid>
             

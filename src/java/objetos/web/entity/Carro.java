@@ -2,11 +2,16 @@
 package objetos.web.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -19,17 +24,22 @@ public class Carro {
     private String fabricante;
     private String cor;
     private Date ano;
+    
+    @OneToOne(cascade= CascadeType.PERSIST)
+    private Fabricante fab=new Fabricante();
 
-    public Carro(Integer id,String modelo, String fabricante, String cor, Date ano) {
+
+    public Carro(Integer id,String modelo, String fabricante, String cor, Date ano, Fabricante fab) {
          this.id=id;
-          this.modelo=modelo;
+         this.modelo=modelo;
          this.fabricante=fabricante;
          this.cor=cor;
          this.ano=ano;
+         this.fab=fab;
     }
-
-    public Carro() {
+    public Carro (){
     }
+ 
 
     public Integer getId() {
         return id;
@@ -49,6 +59,10 @@ public class Carro {
 
     public Date getAno() {
         return ano;
+    }
+
+    public Fabricante getFab() {
+        return fab;
     }
 
     public void setId(Integer id) {
@@ -71,39 +85,12 @@ public class Carro {
         this.ano = ano;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
+    public void setFab(Fabricante fab) {
+        this.fab = fab;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Carro other = (Carro) obj;
-        if (!Objects.equals(this.modelo, other.modelo)) {
-            return false;
-        }
-        if (!Objects.equals(this.fabricante, other.fabricante)) {
-            return false;
-        }
-        if (!Objects.equals(this.cor, other.cor)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return Objects.equals(this.ano, other.ano);
-    }
-
+   
+    
     
     
 }

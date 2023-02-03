@@ -7,21 +7,39 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import objetos.web.DaoJPA.CrudJPA;
+import objetos.web.entity.Fabricante;
 import objetos.web.util.exception.ErroSistema;
 
 
-public abstract class CrudBean <A, D extends CrudJPA> {
+public abstract class CrudBean <A, B, D extends CrudJPA> {
 
 
     private String estadoTela= "buscar"; //inserir, editar, buscar
     
-    
     private A entidade;
     
+    private B fab;
     
     private List<A> entidades;
     
+    private List<B> entidadesNovo;
 
+    public B getFab() {
+        return fab;
+    }
+    
+     public void setFab(B fab) {
+        this.fab = fab;
+    }
+
+    public List<B> getEntidadesNovo() {
+        return entidadesNovo;
+    }
+
+    public void setEntidadesNovo(List<B> entidadesNovo) {
+        this.entidadesNovo = entidadesNovo;
+    }
+    
     public String getEstadoTela() {
         return estadoTela;
     }
@@ -65,18 +83,21 @@ public abstract class CrudBean <A, D extends CrudJPA> {
             entidade=criarNovaEntidade();
             adicionarMensagem("Salvo com sucesso", FacesMessage.SEVERITY_INFO);
             
-        } catch (ErroSistema e) {
+        } 
+        catch (ErroSistema e) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, e);
             adicionarMensagem(e.getMessage(), FacesMessage.SEVERITY_ERROR);
         
         }
         
     }
+    
     public void editar(A entidade){
         this.entidade=entidade;
         mudarParaEditar();
         
     }
+  
     public void deletar(A entidade){
         try {
             get().DeletarJPA(entidade);
@@ -99,16 +120,19 @@ public abstract class CrudBean <A, D extends CrudJPA> {
             if (entidades==null||entidades.size()<1){
                  adicionarMensagem("Não temos nada cadastrado", FacesMessage.SEVERITY_WARN);
             }
+           
         }  
          catch (Exception e) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, e);
             
          }
     }
-    
+ 
     public abstract D get();
-    
+        
     public abstract A criarNovaEntidade();
+    
+    public abstract B fabEntidade();
     
     public boolean isInserir(){
         
