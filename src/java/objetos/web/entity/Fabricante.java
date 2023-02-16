@@ -1,23 +1,29 @@
 
 package objetos.web.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@Entity
+
 @SessionScoped
 @ManagedBean
-public class Fabricante {
+@Entity
+@Table(name = "fabricante")
+public class Fabricante implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
     
     private String nome;
@@ -25,11 +31,13 @@ public class Fabricante {
     private String cnpj;
     
     private String telefone;
+    
 
-    public Fabricante(String nome, String cnpj, String telefone) {
+    public Fabricante(String nome, String cnpj, String telefone, Carro car) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.telefone = telefone;
+        
     }
     
     public Fabricante() {
@@ -70,10 +78,10 @@ public class Fabricante {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.nome);
-        hash = 89 * hash + Objects.hashCode(this.cnpj);
-        hash = 89 * hash + Objects.hashCode(this.telefone);
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.nome);
+        hash = 79 * hash + Objects.hashCode(this.cnpj);
+        hash = 79 * hash + Objects.hashCode(this.telefone);
         return hash;
     }
 
@@ -100,6 +108,8 @@ public class Fabricante {
         }
         return Objects.equals(this.id, other.id);
     }
+
+    
 
     
     

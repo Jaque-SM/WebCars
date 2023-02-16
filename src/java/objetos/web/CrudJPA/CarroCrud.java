@@ -29,19 +29,18 @@ public class CarroCrud implements CrudJPA<Carro> {
 
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ObjetosPU");
     private static final EntityManager entityManager = entityManagerFactory.createEntityManager();
-    
-        
     @Override
     public void SalvarJPA(Carro entidade) throws ErroSistema {
          entityManager.getTransaction().begin();
          
         if (entidade.getId()==null&&entidade.getFab().getId()==null){
-                entityManager.createNativeQuery("INSERT INTO Carro (modelo, fabricante, cor, ano, fab) VALUES(?,?,?,?,?);", Carro.class)
+                entityManager.createNativeQuery("INSERT INTO Carro (modelo, fabricante, cor, ano, fab, user) VALUES(?,?,?,?,?,?);", Carro.class)
                      .setParameter(1, entidade.getModelo())
                      .setParameter(2, entidade.getFabricante())
                      .setParameter(3, entidade.getCor())
                      .setParameter(4, new java.sql.Date(entidade.getAno().getTime()))
-                     .setParameter(5, entidade.getFab());
+                     .setParameter(5, entidade.getFab())
+                     .setParameter(6, entidade.getUser());
                         
                       entityManager.persist(entidade);
                      entityManager.getTransaction().commit();
@@ -74,7 +73,6 @@ public class CarroCrud implements CrudJPA<Carro> {
         entityManager.createQuery("delete from Carro c where c.id="+entidade.getId()+"")
         .executeUpdate();         
          entityManager.getTransaction().commit();
-         entityManager.close();
        System.out.print("Deletado com sucesso!");
          }
          
@@ -88,8 +86,7 @@ public class CarroCrud implements CrudJPA<Carro> {
         TypedQuery<Carro> query=entityManager.createQuery(jpql, Carro.class);
         List<Carro> listaCarros = query.getResultList();
         
-         List<Carro> lista = new ArrayList();
-         
+         List<Carro> lista = new ArrayList();        
     
         for(Carro carros: listaCarros) {
            Carro ava=new Carro();
@@ -119,13 +116,14 @@ public class CarroCrud implements CrudJPA<Carro> {
         List<Fabricante> lista2=new ArrayList<>();
         
          for(Fabricante fabs: listaFabs) {
-                Fabricante dao=new Fabricante();
-                
+              Fabricante dao=new Fabricante();
+               
               dao.setNome(fabs.getNome());
               dao.setCnpj(fabs.getCnpj());
               dao.setTelefone(fabs.getTelefone());
           
-           lista2.add(dao);
+                lista2.add(dao);
+              
        }
          
          return lista2;

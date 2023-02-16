@@ -1,4 +1,3 @@
-
 package objetos.web.CrudJPA;
 
 import java.util.ArrayList;
@@ -25,29 +24,37 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
     @Override
     public void SalvarJPA(Usuario entidade) throws ErroSistema {
            entityManager.getTransaction().begin();
-         
-         if (entidade.getId()==null){
-            entityManager.createNativeQuery("insert into Usuario(usuario, senha, cars) values(usuario, senha, cars);", Usuario.class)
+           
+           Carro ava=new Carro();
+           
+           for (Carro cars: entidade.getCars()){
+                    ava.setModelo(cars.getModelo());
+                    ava.setFabricante(cars.getFabricante());
+                    ava.setCor(cars.getCor());
+                    ava.setAno(new java.sql.Date(cars.getAno().getTime()));
+                    ava.setUser(entidade);
+           }
+           
+         if (entidade.getId()==null){          
+             entityManager.createNativeQuery("INSERT INTO  Usuario(usuario, senha, users) values(?,?,?);", Usuario.class)
                     .setParameter(1, entidade.getUsuario())
                     .setParameter(2, entidade.getSenha())
-                    .setParameter(3, entidade.getCars());
-                      
+                    .setParameter(3, entidade.getCars().add(ava)); 
+                               
             entityManager.persist(entidade); 
             entityManager.getTransaction().commit();
             System.out.println("Usuário salvo com sucesso!");
-            entityManager.close();
-
          }
          
          else {
-             entityManager.createQuery("update Usuario u set u.usuario=:usuario, u.senha=:senha where u.id="+entidade.getId()+"")
+               /*entityManager.createQuery("update Usuario u set u.usuario=:usuario, u.senha=:senha where u.id="+entidade.getId()+"")
                      .setParameter("usuario", entidade.getUsuario())
                      .setParameter("senha", entidade.getSenha())
                      .executeUpdate();
              
               entityManager.getTransaction().commit();
               System.out.println("Usuario atualizado com sucesso!");
-
+                */
          }
 	
     }
@@ -66,17 +73,44 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
     }
     
     
+    private List<Carro> getObject(){
+      
+        TypedQuery<Carro> query=entityManager.createQuery("select c from Carro c", Carro.class);
 
+         List<Carro> listaCars = query.getResultList();
+        
+         List<Carro> lista =new ArrayList<>();
+         
+        for(Carro cars: listaCars) {
+           Carro ava=new Carro();
+           ava.setModelo(cars.getModelo());
+           ava.setFabricante(cars.getFabricante());
+           ava.setCor(cars.getCor());
+           ava.setAno(cars.getAno());
+           
+           lista.add(ava);
+            
+       }
+        
+        return lista;
+        
+    } 
+    
 
     @Override
     public List<Usuario> buscarJPA() {
          
-        String jpql = "select c from Usuario c";
+        String jpql = "select u from Usuario u";
         
         TypedQuery<Usuario> query=entityManager.createQuery(jpql, Usuario.class);
         List<Usuario> listaUsers = query.getResultList();
         
          List<Usuario> lista=new ArrayList();
+         
+        List<Carro> cars=getObject();
+        
+                
+
 
         for(Usuario user: listaUsers) {
            Usuario ava=new Usuario();
@@ -87,7 +121,7 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
            ava.setSenha(user.getSenha());
            System.out.println("Senha: "+user.getSenha());
 
-
+              ava.setCars(cars);
             lista.add(ava);
        }
          

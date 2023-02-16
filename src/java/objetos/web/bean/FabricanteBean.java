@@ -1,14 +1,10 @@
 
 package objetos.web.bean;
 
-import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 import objetos.web.CrudJPA.FabricanteCrud;
 import objetos.web.entity.Carro;
 import objetos.web.entity.Fabricante;
@@ -46,8 +42,6 @@ public class FabricanteBean extends CrudBean<Fabricante, Carro, FabricanteCrud>{
         this.fab = fab;
     }
 
-    
-    
     @Override
     public FabricanteCrud get() {
         if (fab==null){
@@ -69,7 +63,6 @@ public class FabricanteBean extends CrudBean<Fabricante, Carro, FabricanteCrud>{
         return new Carro();
     }
     
-
     public List<Fabricante> getValor() {
         return valor;
     }
@@ -78,12 +71,6 @@ public class FabricanteBean extends CrudBean<Fabricante, Carro, FabricanteCrud>{
         this.valor = valor;
     }
 
-    public void listaPorFabrica(AjaxBehaviorEvent event){
-     this.valor=this.fab.listarPorEmpresa();
-     
-    }
-    
-   
    
 
 }
