@@ -18,19 +18,33 @@ public class CarroBean extends CrudBean<Carro, Fabricante, CarroCrud>{
     
     private CarroCrud carro; 
     
-    private Fabricante fab;
+    private List<Fabricante> valores;
     
     private Carro car;
     
     private List<Carro> carros;
     
     public CarroBean(){
+        this.valores=new ArrayList<>();
         this.carro=new CarroCrud();
         this.carros=new ArrayList<Carro>();
         this.car=new Carro();
-        carros=carro.buscarJPA();
+        
+        this.valores=carro.buscarB();
+        
+        this.carros=carro.buscarJPA();
         
     }
+
+    public List<Fabricante> getValores() {
+        return valores;
+    }
+
+    public void setValores(List<Fabricante> valores) {
+        this.valores = valores;
+    }
+    
+    
 
     public Carro getCar() {
         return car;
@@ -58,12 +72,8 @@ public class CarroBean extends CrudBean<Carro, Fabricante, CarroCrud>{
             return carro;
     }
     
-    public Fabricante getFabs(){
-        if (fab==null){
-            fab=new Fabricante();
-        }
-        return fab;
-    }
+   
+    
 
     @Override
     public Carro criarNovaEntidade() {
@@ -83,6 +93,13 @@ public class CarroBean extends CrudBean<Carro, Fabricante, CarroCrud>{
         this.carros=carro.buscarJPA();
     }
     
+    
+    public void listaPorFabrica(AjaxBehaviorEvent event){
+     this.valores=this.carro.buscarB();
+     
+    }
+    
+   
    
     
 }

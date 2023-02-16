@@ -24,13 +24,13 @@
                 <h:inputText value="#{usuarioBean.entidade.senha}"></h:inputText>
                 
                  <p:outputLabel  value="Selecione o carro "></p:outputLabel>
-                 <p:selectOneMenu  id="forme" value="#{usuarioBean.entidade.cars}">
+                 <p:selectOneMenu  id="forme" value="#{usuarioBean.entidade.cars}" converter="UsuarioConverter">
                      
-                     <f:selectItem itemLabel="Carro"/>
+                     <f:selectItem itemLabel="Select Car" itemValue=""/>
                     
-                     <f:selectItems value="#{carroBean.carros}" var="carro"  itemValue="#{carro.modelo}" itemLabel="#{carro.modelo}"/>
+                     <f:selectItems value="#{usuarioBean.listcars}" var="carro"  itemValue="#{carro.modelo}" itemLabel="#{carro.modelo}"/>
                      
-                     <p:ajax process="@this" update="forme" listener="#{carroBean.listarCars(event)}" />
+                     <p:ajax process="@this" update="forme" listener="#{usuarioBean.listarCars(event)}" />
                      
                  </p:selectOneMenu>
                         
@@ -58,9 +58,29 @@
                   <h:outputText value="#{user.senha}"></h:outputText>
                         
                     </p:column>
-          
                 
+                            
+                <p:column headerText="Modelo">
+                    <h:outputText value="#{user.cars}"></h:outputText>
+                        
+                    </p:column>
+                 
+              
+          
             </p:dataTable>
+             
+             
+             <p:dataTable value="#{usuarioBean.entidades}" var="carro" rendered="#{usuarioBean.isbuscar()==true}" paginator="true">
+                 
+             
+                 
+                 
+                 
+             </p:dataTable>
+             
+             
+             
+             
            </p:fieldset>
 
         </h:form>

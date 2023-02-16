@@ -17,20 +17,7 @@ public class FabricanteCrud implements CrudJPA<Fabricante>{
     
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ObjetosPU");
     private static final EntityManager entityManager = entityManagerFactory.createEntityManager();
-    
-    private Fabricante fabi;
 
-    public Fabricante getFabi() {
-        return fabi;
-    }
-
-    public void setFabi(Fabricante fabi) {
-        this.fabi = fabi;
-    }
-    public FabricanteCrud(){
-        this.fabi=new Fabricante();
-    }
-   
     @Override
     public void SalvarJPA(Fabricante entidade) throws ErroSistema {
            entityManager.getTransaction().begin();
@@ -117,7 +104,7 @@ public class FabricanteCrud implements CrudJPA<Fabricante>{
         return lista2;
     }
     
-    public static void main (String args[]){
+    /*public static void main (String args[]){
         FabricanteCrud ava=new FabricanteCrud();
         
         List<Fabricante> list=new ArrayList<Fabricante>();
@@ -135,7 +122,7 @@ public class FabricanteCrud implements CrudJPA<Fabricante>{
         
         
         
-    }
+    }*/
     
   
 }

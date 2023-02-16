@@ -30,25 +30,19 @@
                <h:outputLabel value="Ano:"></h:outputLabel>
                <p:calendar value="#{carroBean.entidade.ano}" pattern="yyyy-MM-dd"/> 
                                 
-              <p:outputLabel  value="Selecione  Fábrica: "></p:outputLabel>
-                 <p:selectOneMenu  id="forme" value="#{carroBean.entidade.fab.nome}">
+              <p:outputLabel  value="Selecione a Fábrica: "></p:outputLabel>
+              <p:selectOneMenu  id="forme" value="#{carroBean.entidade.fab}" converter="CarroConverter">
                      
-                     <f:selectItem itemLabel="fábrica"/>
-                    
-                     <f:selectItems value="#{fabricanteBean.valor}" var="f"  itemValue="#{f.nome}" itemLabel="#{f.nome}"/>
-                     
-                     <p:ajax process="@this" update="forme" listener="#{fabricanteBean.listaPorFabrica(event)}" />
+                     <f:selectItem itemLabel="fábrica" />
+                                   
+                     <f:selectItems value="#{carroBean.valores}" var="c"  itemLabel="#{c.nome}" itemValue="#{c.nome}" />
+
+                     <p:ajax process="@this" update="forme" listener="#{carroBean.listaPorFabrica(event)}" />
                      
                  </p:selectOneMenu>
-              
-                
-
                      
              </p:panelGrid>
-             
-            
               
-             
            
              <p:dataTable var="carro" value="#{carroBean.entidades}"  rendered="#{carroBean.isbuscar()==true}" paginator="true" >
                 <p:column>

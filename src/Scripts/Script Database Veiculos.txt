@@ -25,6 +25,7 @@ CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL,
+  `cars_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ); 
 
