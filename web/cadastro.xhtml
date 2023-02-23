@@ -29,22 +29,13 @@
  
                <h:outputLabel value="Ano:"></h:outputLabel>
                <p:calendar value="#{carroBean.entidade.ano}" pattern="yyyy-MM-dd"/> 
-                                
-              <p:outputLabel  value="Selecione a Fábrica: "></p:outputLabel>
-              <p:selectOneMenu  id="forme" value="#{carroBean.entidade.fab}" converter="CarroConverter">
-                     
-                     <f:selectItem itemLabel="fábrica" />
-                                   
-                     <f:selectItems value="#{carroBean.valores}" var="c"  itemLabel="#{c.nome}" itemValue="#{c.nome}" />
-
-                     <p:ajax process="@this" update="forme" listener="#{carroBean.listaPorFabrica(event)}" />
-                     
-                 </p:selectOneMenu>
+                            
                      
              </p:panelGrid>
               
-           
-             <p:dataTable var="carro" value="#{carroBean.entidades}"  rendered="#{carroBean.isbuscar()==true}" paginator="true" >
+             <p:dataTable  value="#{carroBean.entidades}" var="carro" rendered="#{carroBean.isbuscar()==true}" paginator="true"
+                          emptyMessage="Nenhuma palavra-chave encontrada"  selectionMode="single"
+                          selection="#{carroBean.ava}" rowKey="#{carro.id}" filteredValue="#{carroBean.carros}">
                 <p:column>
                     <p:commandButton value="Editar" action="#{carroBean.editar(carro)}" update=":forme"></p:commandButton>
                 </p:column>
@@ -52,20 +43,21 @@
                 <p:column>
                     <p:commandButton value="Remover" action="#{carroBean.deletar(carro)}" update=":forme"></p:commandButton>
                 </p:column>
+                 
                 
-                    <p:column headerText="Modelo">
+                 <p:column headerText="Modelo" filterBy="#{carro.modelo}" sortBy="#{carro.modelo}">
                         <h:outputText value="#{carro.modelo}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="Fabricante">
+                 <p:column headerText="Fabricante" filterBy="#{carro.fabricante}" sortBy="#{carro.fabricante}">
                     <h:outputText value="#{carro.fabricante}"></h:outputText>
-                    </p:column>
+                    </p:column> 
                     
-                    <p:column headerText="Cor">
+                 <p:column headerText="Cor" filterBy="#{carro.cor}" sortBy="#{carro.cor}">
                         <h:outputText value="#{carro.cor}"></h:outputText>
                     </p:column>
                    
-                    <p:column headerText="Ano">
+                 <p:column headerText="Ano" filterBy="#{carro.ano}" sortBy="#{carro.ano}">
                        <h:outputText value="#{carro.ano}"></h:outputText>
                     </p:column> 
                           

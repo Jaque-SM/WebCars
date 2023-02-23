@@ -22,8 +22,7 @@ import javax.persistence.Temporal;
 
 
 @Entity
-@Table(name="carro")
-public class Carro implements Serializable {
+public class Carro  {
   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +60,9 @@ public class Carro implements Serializable {
          this.user=user;
     }
     public Carro (){
+        this.ano=new Date();
         this.fab=new Fabricante();
+        this.user=new Usuario();    
     }
     
     public Integer getId() {

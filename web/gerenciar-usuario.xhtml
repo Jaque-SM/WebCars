@@ -38,49 +38,32 @@
                 
             </p:panelGrid>
             
-            <p:dataTable value="#{usuarioBean.entidades}" var="user" rendered="#{usuarioBean.isbuscar()==true}" paginator="true">
+            <p:dataTable value="#{usuarioBean.entidades}" var="user" rendered="#{usuarioBean.isbuscar()==true}" paginator="true"
+                         emptyMessage="Nenhuma palavra-chave encontrada"  selectionMode="single"
+                         selection="#{usuarioBean.entidade}" rowKey="#{user.id}" filteredValue="#{usuarioBean.listUsers}">
                
-                <p:column>
+                <p:column headerText="EDITAR">
                     <p:commandButton value="Editar"  action="#{usuarioBean.editar(user)}" update="@form"></p:commandButton>
                     </p:column>     
                
                 
-                <p:column>
+                <p:column headerText="DELETAR">
                     <p:commandButton value="Deletar"  action="#{usuarioBean.deletar(user)}"  update="@form"></p:commandButton>
                     </p:column>
                 
-                <p:column headerText="Usuário">
+                <p:column headerText="Usuário" filterBy="#{user.usuario}" sortBy="#{user.usuario}">
                   <h:outputText value="#{user.usuario}"></h:outputText>
-                        
                     </p:column>
                      
-                <p:column headerText="Senha">
+                <p:column headerText="Senha" filterBy="#{user.senha}" sortBy="#{user.senha}">
                   <h:outputText value="#{user.senha}"></h:outputText>
                         
                     </p:column>
                 
-                            
-                <p:column headerText="Modelo">
-                    <h:outputText value="#{user.cars}"></h:outputText>
-                        
-                    </p:column>
-                 
-              
           
             </p:dataTable>
-             
-             
-             <p:dataTable value="#{usuarioBean.entidades}" var="carro" rendered="#{usuarioBean.isbuscar()==true}" paginator="true">
-                 
-             
-                 
-                 
-                 
-             </p:dataTable>
-             
-             
-             
-             
+            
+              
            </p:fieldset>
 
         </h:form>

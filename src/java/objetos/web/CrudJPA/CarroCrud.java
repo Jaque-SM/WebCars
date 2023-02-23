@@ -38,7 +38,7 @@ public class CarroCrud implements CrudJPA<Carro> {
                      .setParameter(1, entidade.getModelo())
                      .setParameter(2, entidade.getFabricante())
                      .setParameter(3, entidade.getCor())
-                     .setParameter(4, new java.sql.Date(entidade.getAno().getTime()))
+                     .setParameter(4, entidade.getAno().getTime())
                      .setParameter(5, entidade.getFab())
                      .setParameter(6, entidade.getUser());
                         
@@ -129,36 +129,6 @@ public class CarroCrud implements CrudJPA<Carro> {
          return lista2;
     }
     
-    
-     /*public static void main (String args[]) throws ErroSistema{
-         
-          Fabricante aba=new Fabricante();
-          aba.setId(Integer.BYTES);
-          aba.setNome("Wolks");
-          aba.setCnpj("dsdfdsf");
-          aba.setTelefone("562625");
-          
-          CarroCrud car=new CarroCrud();
-          
-       /* java.util.Date utilDate = new java.util.Date();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        
-        Carro entidade=new Carro();
-          
-        entidade.setModelo("sdfdfd");
-        entidade.setFabricante("dsdfsf");
-        entidade.setCor("branco");
-        entidade.setAno(sqlDate);
-        entidade.setFab(aba);
-        
-        car.SalvarJPA(entidade, aba);
-       car.buscarJPA();
-
-         
-         
-         
-     }*/
-
    
    
 

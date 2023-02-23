@@ -14,21 +14,16 @@ import objetos.web.entity.Usuario;
 
 @SessionScoped
 @ManagedBean
-public class UsuarioBean extends CrudBean<Usuario, Fabricante, UsuarioCrud>{
-
-    private List<Carro> listcars;
+public class UsuarioBean extends CrudBean<Usuario, UsuarioCrud>{
     
     private UsuarioCrud user;
     
-    private CarroCrud ava;
-    
-    private Carro carts;
+    private List<Usuario> listUsers;
 
     public UsuarioBean() {
-        this.carts=new Carro();
-        this.ava=new CarroCrud();
-        this.listcars=new ArrayList<>();
-        this.listcars=ava.buscarJPA();
+        
+        this.listUsers=new ArrayList<Usuario>();
+            
         
     }   
     
@@ -37,57 +32,34 @@ public class UsuarioBean extends CrudBean<Usuario, Fabricante, UsuarioCrud>{
         if (user==null){
             user=new UsuarioCrud();
         }
-        
+        this.listUsers=user.buscarJPA();
         return user;
         
     }
 
+    public UsuarioCrud getUser() {
+        return user;
+    }
+        
     @Override
     public Usuario criarNovaEntidade() {
             return new Usuario();
 
     }
 
-    @Override
-    public Fabricante fabEntidade() {
-            return new Fabricante();
+    public List<Usuario> getListUsers() {
+        return listUsers;
     }
 
-    public Carro getCarts() {
-        return carts;
-    }
-
-    public void setCarts(Carro carts) {
-        this.carts = carts;
-    }
-    
-    
-      public List<Carro> getListcars() {
-        return listcars;
-    }
-
-    public void setListcars(List<Carro> listcars) {
-        this.listcars = listcars;
-    }
-
-    public CarroCrud getAva() {
-        return ava;
+    public void setListUsers(List<Usuario> listUsers) {
+        this.listUsers = listUsers;
     }
 
     public void setUser(UsuarioCrud user) {
         this.user = user;
     }
     
-    public void setAva(CarroCrud ava) {
-        this.ava = ava;
-    }
-    
-    
-       public void listarCars(AjaxBehaviorEvent event){
-        this.listcars=ava.buscarJPA();
-    }
-    
-    
+  
 
   
 }

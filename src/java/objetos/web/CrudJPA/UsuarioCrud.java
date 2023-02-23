@@ -2,7 +2,6 @@ package objetos.web.CrudJPA;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Query;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,7 +9,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import objetos.web.DaoJPA.CrudJPA;
 import objetos.web.entity.Carro;
-import objetos.web.entity.Fabricante;
 import objetos.web.entity.Usuario;
 import objetos.web.util.exception.ErroSistema;
 
@@ -47,14 +45,15 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
          }
          
          else {
-               /*entityManager.createQuery("update Usuario u set u.usuario=:usuario, u.senha=:senha where u.id="+entidade.getId()+"")
+               entityManager.createQuery("update Usuario u set u.usuario=:usuario, u.senha=:senha, where u.id="+entidade.getId()+"")
                      .setParameter("usuario", entidade.getUsuario())
                      .setParameter("senha", entidade.getSenha())
+                     .setParameter("cars", entidade.getCars().add(ava))
                      .executeUpdate();
              
               entityManager.getTransaction().commit();
               System.out.println("Usuario atualizado com sucesso!");
-                */
+                
          }
 	
     }
@@ -86,8 +85,7 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
            ava.setModelo(cars.getModelo());
            ava.setFabricante(cars.getFabricante());
            ava.setCor(cars.getCor());
-           ava.setAno(cars.getAno());
-           
+           ava.setAno(cars.getAno());         
            lista.add(ava);
             
        }
@@ -105,12 +103,7 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
         TypedQuery<Usuario> query=entityManager.createQuery(jpql, Usuario.class);
         List<Usuario> listaUsers = query.getResultList();
         
-         List<Usuario> lista=new ArrayList();
-         
-        List<Carro> cars=getObject();
-        
-                
-
+         List<Usuario> lista=new ArrayList();         
 
         for(Usuario user: listaUsers) {
            Usuario ava=new Usuario();
@@ -121,7 +114,6 @@ public class UsuarioCrud implements CrudJPA<Usuario>{
            ava.setSenha(user.getSenha());
            System.out.println("Senha: "+user.getSenha());
 
-              ava.setCars(cars);
             lista.add(ava);
        }
          

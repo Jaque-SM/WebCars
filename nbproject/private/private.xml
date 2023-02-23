@@ -5,17 +5,18 @@
         <group>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/entity/Fabricante.java</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/bean/UsuarioBean.java</file>
+            <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/model/FabricanteDataModel.java</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/bean/CarroBean.java</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/entity/Carro.java</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/CrudJPA/UsuarioCrud.java</file>
-            <file>file:/C:/Users/Jaque/Desktop/WebCars/web/cadastro.xhtml</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/bean/CrudBean.java</file>
+            <file>file:/C:/Users/Jaque/Desktop/WebCars/web/cadastro.xhtml</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/bean/FabricanteBean.java</file>
-            <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/conversor/CarroConverter.java</file>
+            <file>file:/C:/Users/Jaque/Desktop/WebCars/web/fabrica.xhtml</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/entity/Usuario.java</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/CrudJPA/CarroCrud.java</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/CrudJPA/FabricanteCrud.java</file>
-            <file>file:/C:/Users/Jaque/Desktop/WebCars/src/java/objetos/web/conversor/UserConverter.java</file>
+            <file>file:/C:/Users/Jaque/Desktop/WebCars/web/resources/component/toolbarCrud.xhtml</file>
             <file>file:/C:/Users/Jaque/Desktop/WebCars/web/gerenciar-usuario.xhtml</file>
         </group>
     </open-files>
