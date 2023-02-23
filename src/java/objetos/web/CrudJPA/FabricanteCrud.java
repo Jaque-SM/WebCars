@@ -21,9 +21,11 @@ public class FabricanteCrud implements CrudJPA<Fabricante>{
     @Override
     public void SalvarJPA(Fabricante entidade) throws ErroSistema {
            entityManager.getTransaction().begin();
+           
+           System.out.println("Nome: "+entidade.getNome());
                 
-           if (entidade.getId()==null){
-           entityManager.createNativeQuery("insert into Fabricante(nome, cnpj, telefone) values(?, ?, ?);", Fabricante.class)
+           if (entidade.getId()==null&&entidade.getNome()!=null){
+           entityManager.createNativeQuery("INSERT INTO Fabricante(nome, cnpj, telefone) values(?,?,?);", Fabricante.class)
                  .setParameter(1, entidade.getNome())
                  .setParameter(2, entidade.getCnpj())
                  .setParameter(3, entidade.getTelefone());
@@ -34,7 +36,7 @@ public class FabricanteCrud implements CrudJPA<Fabricante>{
                   
            }         
            else {
-                   entityManager.createQuery("update Fabricante f set f.nome=:nome, f.cnpj=:cnpj, f.telefone=:telefone where u.id="+entidade.getId()+"")
+                  entityManager.createQuery("update Fabricante f set f.nome=:nome, f.cnpj=:cnpj, f.telefone=:telefone where u.id="+entidade.getId()+"")
                      .setParameter("nome", entidade.getNome())
                      .setParameter("cnpj", entidade.getCnpj())
                      .setParameter("telefone", entidade.getTelefone())
@@ -85,46 +87,8 @@ public class FabricanteCrud implements CrudJPA<Fabricante>{
          return lista2;
     }
 
-    public List<Fabricante> listarPorEmpresa(){        
-        
-      TypedQuery<Fabricante> query2=entityManager.createQuery("select f from Fabricante f", Fabricante.class);
-      
-      List<Fabricante> listaFabs = query2.getResultList();
-      
-       List<Fabricante> lista2=new ArrayList<>();   
-      
-       for(Fabricante fabs: listaFabs) {
-          
-             Fabricante dao=new Fabricante();
-              dao.setNome(fabs.getNome());
-              
-              lista2.add(dao);
-          
-       }
-        return lista2;
-    }
     
-    /*public static void main (String args[]){
-        FabricanteCrud ava=new FabricanteCrud();
-        
-        List<Fabricante> list=new ArrayList<Fabricante>();
-        
-        list=ava.listarPorEmpresa();
-        
-        for (Fabricante fabe: list){
-            System.out.println("Nome: "+fabe.getNome());
-           
-
-
-        }
-        
-        
-        
-        
-        
-    }*/
-    
-  
+   
 }
 
     

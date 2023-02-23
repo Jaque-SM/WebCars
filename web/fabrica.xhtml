@@ -12,7 +12,7 @@
         
        <h:form id="forme">
                  
-         <p:fieldset>
+           <p:fieldset legend="Cadastro Fábrica">
                   <p:messages autoUpdate="true"/>
 
              <sc:toolbarCrud crudBean="#{fabricanteBean}"/>
@@ -30,7 +30,7 @@
                  
              </p:panelGrid>
                  
-             <p:dataTable var="fabrica" value="#{fabricanteBean.entidades}"  rendered="#{fabricanteBean.isbuscar()==true}" paginator="true" >
+             <p:dataTable value="#{fabricanteBean.entidades}" var="fabrica"  rendered="#{fabricanteBean.isbuscar()==true}" paginator="true">
                 <p:column>
                     <p:commandButton value="Editar" action="#{fabricanteBean.editar(fabrica)}" update=":forme"></p:commandButton>
                 </p:column>
@@ -39,8 +39,7 @@
                      <p:commandButton value="Remover" action="#{fabricanteBean.deletar(fabrica)}" update=":forme"></p:commandButton>
                 </p:column>
                      
-                 
-                 <p:column headerText="Nome">
+                 <p:column headerText="Nome"  >
                         <h:outputText value="#{fabrica.nome}"></h:outputText>
                   </p:column>
                  
@@ -51,40 +50,16 @@
                     <p:column headerText="Telefone">
                         <h:outputText value="#{fabrica.telefone}"></h:outputText>
                   </p:column>
-                 
-                 
-                 
-                 
-                 
+                     
              </p:dataTable>
              
-             
-             
-             
-             
-             
-             
-             
-         </p:fieldset>
-         
-         
-         
-        
-       
-       
+         </p:fieldset>       
        
        </h:form>
-        
-        
-        
-        
-        
-        
+            
         
     </ui:define>
     
-    
-    
-        
+      
 </ui:composition>
 
