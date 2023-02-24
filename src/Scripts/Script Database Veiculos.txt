@@ -9,6 +9,7 @@ CREATE TABLE `carro` (
   `cor` varchar(45) NOT NULL,
   `ano` date NOT NULL,
   `fab_id` int DEFAULT NULL,
+  `usuario_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ); 
 **************************************************
