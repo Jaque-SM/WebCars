@@ -29,7 +29,18 @@
  
                <h:outputLabel value="Ano:"></h:outputLabel>
                <p:calendar value="#{carroBean.entidade.ano}" pattern="yyyy-MM-dd"/> 
-                            
+               
+               <h:outputLabel value="Fábrica:"></h:outputLabel>
+               <p:selectOneMenu id="forme" value="#{carroBean.entidade.fab}"  converter="CarroConverter">
+                  
+                 <f:selectItem itemLabel="Select Fabrica" itemValue=""/>
+                  
+                 <f:selectItems value="#{carroBean.valores}" var="car" itemValue="#{car.nome}" itemLabel="#{car.nome}" />
+                 
+                 <p:ajax event="change"  update="@this" listener="#{carroBean.listaPorFabrica(event)}"/>
+               
+               </p:selectOneMenu>
+               
                      
              </p:panelGrid>
               
