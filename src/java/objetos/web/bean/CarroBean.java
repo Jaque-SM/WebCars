@@ -28,15 +28,13 @@ public class CarroBean extends CrudBean<Carro, CarroCrud>{
     private List<Carro> carros;
     
      public CarroBean(){
+        this.carCrud=new CarroCrud();
         this.valores=new ArrayList<>();
         this.carros=new ArrayList<Carro>();
         
-        
-        
-       this.carCrud=new CarroCrud();
-       this.carros=carCrud.buscarJPA();
 
-        
+       this.valores=carCrud.buscarB();
+
     }
     
     @Override
@@ -61,11 +59,10 @@ public class CarroBean extends CrudBean<Carro, CarroCrud>{
                 carro=new CarroCrud();                
                 
             }
+           this.carros=carro.buscarJPA();
            return carro;
     }
     
-    
-   
 
     public CarroCrud getCarro() {
         return carro;
@@ -111,11 +108,6 @@ public class CarroBean extends CrudBean<Carro, CarroCrud>{
         
         return false;
     } 
-    
-   
-    
-
-    
 
   
     public void listarCars(AjaxBehaviorEvent event){
@@ -124,7 +116,7 @@ public class CarroBean extends CrudBean<Carro, CarroCrud>{
     
     
     public void listaPorFabrica(AjaxBehaviorEvent event){
-     this.valores=this.carro.buscarB();
+     this.valores=this.carCrud.buscarB();
      
     }
 
